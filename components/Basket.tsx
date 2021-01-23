@@ -1,5 +1,10 @@
 import React from "react"
 import { createStyles, Theme, makeStyles } from "@material-ui/core/styles"
+
+import { useSelector } from "react-redux" ///////////////////////////////////////////
+
+import { store, remove } from "../store" ///////////////////////////////////////////
+
 import {
   List,
   ListItem,
@@ -37,7 +42,7 @@ const useStyles = makeStyles((theme: Theme) =>
 
 const Basket = () => {
   const classes = useStyles({})
-  const products = [] // TODO
+  const products = useSelector((state: ProductItem[]) => state) ///////////////////////////////////////////
 
   return (
     <>
@@ -76,9 +81,7 @@ const Basket = () => {
                   <IconButton
                     edge="end"
                     aria-label="delete"
-                    onClick={() => {
-                      /* Remove from basket */
-                    }}
+                    onClick={() => store.dispatch(remove({ id: product.id }))} ///////////////////////////////////////////
                   >
                     <DeleteIcon />
                   </IconButton>
